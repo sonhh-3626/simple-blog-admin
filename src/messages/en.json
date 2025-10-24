@@ -1,0 +1,11 @@
+{
+  "TabTitle": {
+    "home": "Simple Blog Admin"
+  },
+  "Header": {
+    "title": "Simple Blog Admin"
+  },
+  "Greeting": {
+    "text": "Hello world!"
+  }
+}
