@@ -7,5 +7,59 @@
   },
   "Greeting": {
     "text": "Hello world!"
+  },
+  "PostsPage": {
+    "allPosts": "All posts",
+    "hasNoPost": "No posts"
+  },
+  "Breadcrumb": {
+    "home": "Home",
+    "Posts": "Posts",
+    "PostId": "Post ID"
+  },
+  "CategoryBadge": {
+    "Technology": "Technology",
+    "Travel": "Travel",
+    "Food": "Food",
+    "Lifestyle": "Lifestyle",
+    "Fashion": "Fashion"
+  },
+  "SearchBox": {
+    "searchPlaceholder": "Search posts..."
+  },
+  "ItemsPerPageSelector": {
+    "postsPerPage": "Posts per page"
+  },
+  "SortSelector": {
+    "newest": "Newest",
+    "mostViews": "Most views",
+    "mostPopular": "Most popular"
+  },
+  "PostCard": {
+    "draft": "Draft",
+    "minutes": "minutes"
+  },
+  "MetaInfo": {
+    "minutesRead": "minutes read",
+    "views": "views",
+    "likes": "likes"
+  },
+  "RelatedPosts": {
+    "title": "Related posts",
+    "minutesRead": "minutes read"
+  },
+  "ShareSection": {
+    "title": "Share post"
+  },
+  "TableOfContents": {
+    "title": "Table of Contents",
+    "introduction": "Introduction",
+    "serverComponents": "Server Components",
+    "appRouter": "App Router",
+    "conclusion": "Conclusion",
+    "empty": "No content"
+  },
+  "Tags": {
+    "title": "Tags"
   }
 }

@@ -7,5 +7,59 @@
   },
   "Greeting": {
     "text": "Xin chào thế giới!"
+  },
+  "PostsPage": {
+    "allPosts": "Tất cả các bài viết",
+    "hasNoPost": "Không có bài viết nào"
+  },
+  "Breadcrumb": {
+    "home": "Trang chủ",
+    "Posts": "Bài viết",
+    "PostId": "ID bài viết"
+  },
+  "CategoryBadge": {
+    "Technology": "Công nghệ",
+    "Travel": "Du lịch",
+    "Food": "Ẩm thực",
+    "Lifestyle": "Phong cách sống",
+    "Fashion": "Thời trang"
+  },
+  "SearchBox": {
+    "searchPlaceholder": "Tìm kiếm bài viết..."
+  },
+  "ItemsPerPageSelector": {
+    "postsPerPage": "Bài viết mỗi trang"
+  },
+  "SortSelector": {
+    "newest": "Mới nhất",
+    "mostViews": "Nhiều lượt xem nhất",
+    "mostPopular": "Phổ biến nhất"
+  },
+  "PostCard": {
+    "draft": "Bản nháp",
+    "minutes": "phút"
+  },
+  "MetaInfo": {
+    "minutesRead": "phút đọc",
+    "views": "lượt xem",
+    "likes": "lượt thích"
+  },
+  "RelatedPosts": {
+    "title": "Bài viết liên quan",
+    "minutesRead": "phút đọc"
+  },
+  "ShareSection": {
+    "title": "Chia sẻ bài viết"
+  },
+  "TableOfContents": {
+    "title": "Nội dung",
+    "introduction": "Giới thiệu",
+    "serverComponents": "Server Components",
+    "appRouter": "App Router",
+    "conclusion": "Kết luận",
+    "empty": "No content"
+  },
+  "Tags": {
+    "title": "Tags"
   }
 }
