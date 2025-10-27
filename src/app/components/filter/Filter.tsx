@@ -8,16 +8,16 @@ interface FilterProps {
   postsPerPage: number;
   setPostsPerPage: (limit: number) => void;
   sortBy: string;
-  setSortBy: (order: string) => void;
+  setSortBy: (sort: string) => void;
 }
 
 export default function Filter({
   searchQuery,
-  setSearchQuery = () => {},
+  setSearchQuery,
   postsPerPage,
-  setPostsPerPage = () => {},
+  setPostsPerPage,
   sortBy,
-  setSortBy = () => {},
+  setSortBy,
 }: FilterProps) {
   return (
     <div className="mb-6 flex flex-col sm:flex-row items-center justify-between gap-4">

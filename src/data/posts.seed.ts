@@ -111,7 +111,7 @@ import Image from 'next/image'
 <Image
   src="/hero.jpg"
   alt="Hero"
-  wpostIdth={800}
+  width={800}
   height={400}
   priority
 />
