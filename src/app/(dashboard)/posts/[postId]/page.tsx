@@ -19,7 +19,7 @@ export default async function PostDetailPage({
 }: PostDetailPageProps) {
   const id = (await params).postId
   const post = postsSeed.find((p) => p.postId === String(id || ''));
-
+  // sử dụng fetch và params.postId để lấy chi tiết một bài viết.
   if (!post) {
     notFound();
   }

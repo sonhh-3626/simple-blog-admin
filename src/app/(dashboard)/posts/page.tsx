@@ -20,6 +20,7 @@ export default function PostsPage() {
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
+    // sử dụng fetch để lấy danh sách bài viết từ API Route đã tạo và hiển thị chúng.
     const storedPosts = localStorage.getItem('posts');
     if (storedPosts) {
       setPosts(JSON.parse(storedPosts));
