@@ -8,7 +8,22 @@ import Tags from '@/app/components/post-detail/Tags';
 import MetaInfo from '@/app/components/post-detail/MetaInfo';
 import AuthorInfo from '@/app/components/post-detail/AuthorInfo';
 import ContentSection from '@/app/components/post-detail/ContentSection';
-import { postsSeed } from '@/data/posts.seed';
+import { Post } from '@/types/post';
+
+export async function fetchPostById(id: string): Promise<{ post: Post, relatedPosts: Post[] }> {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ''}/api/posts/${id}`, {});
+
+  if (response.status === 404) {
+    notFound();
+  }
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch post (status ${response.status})`);
+  }
+
+  const json = await response.json();
+  return json.data;
+}
 
 interface PostDetailPageProps {
   params: { postId: string }
@@ -17,16 +32,13 @@ interface PostDetailPageProps {
 export default async function PostDetailPage({
   params
 }: PostDetailPageProps) {
-  const { postId } = await params
-  const post = postsSeed.find((p) => p.postId === postId);
+  const { postId } = await params;
+
+  const { post, relatedPosts } = await fetchPostById(postId);
 
   if (!post) {
     notFound();
   }
-
-  const relatedPosts = postsSeed
-    .filter((p) => p.category === post.category && p.postId !== post.postId)
-    .slice(0, 3);
 
   return (
     <article className="pb-16">

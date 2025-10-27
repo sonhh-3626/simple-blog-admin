@@ -1,87 +1,109 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
+import { useSearchParams, useRouter } from 'next/navigation';
 
 import Filter from '@/app/components/filter/Filter';
 import Heading1 from '@/app/components/heading/Heading1';
 import Pagination from '@/app/components/Pagination';
 import PostCard from '@/app/components/post-card/PostCard';
-import { postsSeed } from '@/data/posts.seed';
 import { Post } from '@/types/post';
+
+interface FetchPostsParams {
+  search?: string;
+  sort?: string;
+  page?: number;
+  limit?: number;
+}
+
+interface FetchPostsResponse {
+  data: Post[];
+  totalPages: number;
+}
+
+export async function fetchPosts({
+  search = '',
+  sort = 'newest',
+  page = 1,
+  limit = 6,
+}: FetchPostsParams): Promise<FetchPostsResponse> {
+  const params = new URLSearchParams({
+    search,
+    sort,
+    page: page.toString(),
+    limit: limit.toString(),
+  });
+
+  const response = await fetch(`/api/posts?${params.toString()}`, {
+    cache: 'no-store',
+  });
+
+  if (!response.ok) {
+    if (response.status >= 500) {
+      throw new Error(`Server error: Failed to fetch posts (${response.status})`);
+    } else if (response.status >= 400) {
+      throw new Error(`Client error: Failed to fetch posts (${response.status})`);
+    } else {
+      throw new Error(`Failed to fetch posts (${response.status})`);
+    }
+  }
+
+  const json = await response.json();
+  return {
+    data: json.data,
+    totalPages: json.meta?.totalPages ?? json.totalPages ?? 1,
+  };
+}
 
 export default function PostsPage() {
   const t = useTranslations('PostsPage');
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
   const [posts, setPosts] = useState<Post[]>([]);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [sortBy, setSortBy] = useState('newest');
-  const [postsPerPage, setPostsPerPage] = useState(6);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
+  const initialSearchQuery = searchParams.get('search') || '';
+  const initialSortBy = searchParams.get('sort') || 'newest';
+  const initialCurrentPage = Number(searchParams.get('page') || 1);
+  const initialPostsPerPage = Number(searchParams.get('limit') || 6);
+
+  const [searchQuery, setSearchQuery] = useState(initialSearchQuery);
+  const [sortBy, setSortBy] = useState(initialSortBy);
+  const [currentPage, setCurrentPage] = useState(initialCurrentPage);
+  const [postsPerPage, setPostsPerPage] = useState(initialPostsPerPage);
 
   useEffect(() => {
-    try {
-      const storedPosts = localStorage.getItem('posts');
-      if (storedPosts) {
-        const parsed = JSON.parse(storedPosts);
-        if (Array.isArray(parsed)) {
-          setPosts(parsed);
-        } else {
-          console.warn('Dữ liệu localStorage không hợp lệ, khởi tạo lại.');
-          localStorage.setItem('posts', JSON.stringify(postsSeed));
-          setPosts(postsSeed);
-        }
-      } else {
-        localStorage.setItem('posts', JSON.stringify(postsSeed));
-        setPosts(postsSeed);
-      }
-    } catch (error) {
-      console.error('Lỗi đọc localStorage:', error);
-      localStorage.removeItem('posts');
-      setPosts(postsSeed);
-    }
-
-    const handleStorageChange = (e: StorageEvent) => {
-      if (e.key === 'filterState' && e.newValue) {
-        const { searchQuery, sortBy, postsPerPage } = JSON.parse(e.newValue);
-        setSearchQuery(searchQuery);
-        setSortBy(sortBy);
-        setPostsPerPage(postsPerPage);
+    const loadPosts = async () => {
+      try {
+        const { data, totalPages } = await fetchPosts({
+          search: searchQuery,
+          sort: sortBy,
+          page: currentPage,
+          limit: postsPerPage,
+        });
+        setPosts(data);
+        setTotalPages(totalPages);
+      } catch (error: any) {
+        console.error('Failed to load posts:', error.message);
+        // Optionally, you could set an error state here to display a message to the user
       }
     };
 
-    window.addEventListener('storage', handleStorageChange);
-    return () => {
-      window.removeEventListener('storage', handleStorageChange);
-    };
-  }, []);
+    loadPosts();
+  }, [searchQuery, sortBy, currentPage, postsPerPage]);
 
   useEffect(() => {
-    const filterState = { searchQuery, sortBy, postsPerPage };
-    localStorage.setItem('filterState', JSON.stringify(filterState));
-  }, [searchQuery, sortBy, postsPerPage]);
+    const params = new URLSearchParams();
+    if (searchQuery) params.set('search', searchQuery);
+    if (sortBy !== 'newest') params.set('sort', sortBy);
+    if (currentPage !== 1) params.set('page', currentPage.toString());
+    if (postsPerPage !== 6) params.set('limit', postsPerPage.toString());
 
-  const filteredPosts = useMemo(() => {
-    let filtered = posts.filter((post) =>
-      post.title.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-
-    if (sortBy === 'newest') {
-      filtered.sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
-    } else if (sortBy === 'views') {
-      filtered.sort((a, b) => b.views - a.views);
-    } else if (sortBy === 'likes') {
-      filtered.sort((a, b) => b.likes - a.likes);
-    }
-
-    return filtered;
-  }, [posts, searchQuery, sortBy]);
-
-  const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
-  const paginatedPosts = useMemo(() => {
-    const startIndex = (currentPage - 1) * postsPerPage;
-    return filteredPosts.slice(startIndex, startIndex + postsPerPage);
-  }, [filteredPosts, currentPage, postsPerPage]);
+    router.replace(`/posts?${params.toString()}`);
+  }, [searchQuery, sortBy, currentPage, postsPerPage, router]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -89,7 +111,7 @@ export default function PostsPage() {
 
   return (
     <div className="mx-auto py-5">
-      <Heading1 title={t("allPosts")} />
+      <Heading1 title={t('allPosts')} />
 
       <Filter
         searchQuery={searchQuery}
@@ -101,8 +123,8 @@ export default function PostsPage() {
       />
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {paginatedPosts.length !== 0 ? (
-          paginatedPosts.map((post) => (
+        {posts.length > 0 ? (
+          posts.map((post) => (
             <Link key={post.postId} href={`/posts/${post.postId}`}>
               <PostCard post={post} />
             </Link>

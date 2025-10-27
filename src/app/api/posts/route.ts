@@ -1,0 +1,45 @@
+import { Post } from '@/types/post';
+import { NextResponse } from 'next/server';
+
+const DB_API_URL = `${process.env.DB_API_URL}`;
+
+export async function GET(request: Request) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const searchQuery = searchParams.get('search') || '';
+    const sortBy = searchParams.get('sort') || 'newest';
+    const currentPage = Number(searchParams.get('page') || 1);
+    const postsPerPage = Number(searchParams.get('limit') || 6);
+
+    const res = await fetch(DB_API_URL);
+    if (!res.ok) throw new Error('Failed to fetch data from json-server');
+    let posts = await res.json();
+
+    let filteredPosts = posts.filter((post: Post) =>
+      post.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
+    if (sortBy === 'newest') {
+      filteredPosts.sort(
+        (a: Post, b: Post) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+      );
+    } else if (sortBy === 'views') {
+      filteredPosts.sort((a: Post, b: Post) => b.views - a.views);
+    } else if (sortBy === 'likes') {
+      filteredPosts.sort((a: Post, b: Post) => b.likes - a.likes);
+    }
+
+    const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
+    const startIndex = (currentPage - 1) * postsPerPage;
+    const paginatedPosts = filteredPosts.slice(startIndex, startIndex + postsPerPage);
+
+    return NextResponse.json({
+      success: true,
+      data: paginatedPosts,
+      totalPages: totalPages,
+    });
+  } catch (error) {
+    console.error('Error fetching posts:', error);
+    return NextResponse.json({ message: 'Internal Server Error' }, { status: 500 });
+  }
+}
