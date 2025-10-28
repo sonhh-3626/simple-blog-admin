@@ -13,11 +13,11 @@ interface FilterProps {
 
 export default function Filter({
   searchQuery,
-  setSearchQuery = () => {},
+  setSearchQuery,
   postsPerPage,
-  setPostsPerPage = () => {},
+  setPostsPerPage,
   sortBy,
-  setSortBy = () => {},
+  setSortBy,
 }: FilterProps) {
   return (
     <div className="mb-6 flex flex-col sm:flex-row items-center justify-between gap-4">

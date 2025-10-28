@@ -31,7 +31,7 @@ Next.js 14 mang đến nhiều cải tiến quan trọng giúp xây dựng ứng
     coverImage: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&h=400&fit=crop',
     author: {
       name: 'Nguyễn Văn An',
-      avatar: 'https://i.pravatar.cc/150?img=12',
+      avatar: 'https://i.pravatar.cc/150?Image=12',
       role: 'Senior Developer'
     },
     category: 'Next.js',
@@ -74,7 +74,7 @@ Sử dụng Server Components mặc định và chỉ chuyển sang Client Compo
     coverImage: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=400&fit=crop',
     author: {
       name: 'Trần Thị Bình',
-      avatar: 'https://i.pravatar.cc/150?img=45',
+      avatar: 'https://i.pravatar.cc/150?Image=45',
       role: 'Tech Lead'
     },
     category: 'Next.js',
@@ -124,7 +124,7 @@ Cải thiện LCP (Largest Contentful Paint) và tổng thể Core Web Vitals.
     coverImage: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=400&fit=crop',
     author: {
       name: 'Lê Văn Cường',
-      avatar: 'https://i.pravatar.cc/150?img=33',
+      avatar: 'https://i.pravatar.cc/150?Image=33',
       role: 'Performance Engineer'
     },
     category: 'Performance',
@@ -178,7 +178,7 @@ Wrap ứng dụng với Redux ProvpostIder trong layout.tsx.
     coverImage: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=400&fit=crop',
     author: {
       name: 'Phạm Thị Dung',
-      avatar: 'https://i.pravatar.cc/150?img=25',
+      avatar: 'https://i.pravatar.cc/150?Image=25',
       role: 'Full Stack Developer'
     },
     category: 'State Management',
@@ -228,7 +228,7 @@ NextAuth tự động quản lý sessions và refresh tokens.
     coverImage: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&h=400&fit=crop',
     author: {
       name: 'Hoàng Văn Em',
-      avatar: 'https://i.pravatar.cc/150?img=56',
+      avatar: 'https://i.pravatar.cc/150?Image=56',
       role: 'Security Specialist'
     },
     category: 'Authentication',
@@ -278,7 +278,7 @@ Tạo sitemap tự động với generateSitemaps.
     coverImage: 'https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=800&h=400&fit=crop',
     author: {
       name: 'Vũ Thị Phương',
-      avatar: 'https://i.pravatar.cc/150?img=41',
+      avatar: 'https://i.pravatar.cc/150?Image=41',
       role: 'SEO Specialist'
     },
     category: 'SEO',
@@ -327,7 +327,7 @@ Viết tests cho API endpoints.
     coverImage: 'https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=800&h=400&fit=crop',
     author: {
       name: 'Đỗ Văn Giang',
-      avatar: 'https://i.pravatar.cc/150?img=68',
+      avatar: 'https://i.pravatar.cc/150?Image=68',
       role: 'QA Engineer'
     },
     category: 'Testing',
@@ -374,7 +374,7 @@ Thêm custom domain và SSL certificate.
     coverImage: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=400&fit=crop',
     author: {
       name: 'Ngô Thị Hà',
-      avatar: 'https://i.pravatar.cc/150?img=20',
+      avatar: 'https://i.pravatar.cc/150?Image=20',
       role: 'DevOps Engineer'
     },
     category: 'Deployment',

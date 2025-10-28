@@ -22,7 +22,7 @@
 - [ ] Khoảng cách, màu sắc, font-size đúng theo guideline
 - [ ] Responsive tốt trên mobile / tablet / desktop
 - [ ] Dùng HTML semantic đúng: `section`, `main`, `button`, `label`, v.v.
-- [ ] Mỗi `img` có `alt`, mỗi `input` có `label` → đảm bảo accessibility (a11y) cơ bản
+- [ ] Mỗi `Image` có `alt`, mỗi `input` có `label` → đảm bảo accessibility (a11y) cơ bản
 - [ ] Class đặt tên có nghĩa, rõ ràng, theo chuẩn team
   _(Tránh đặt kiểu `btn123`, `x1`, `test-div`...)_
 - [ ] Không hardcode dữ liệu: text, màu sắc, URL... → dùng biến, hằng số (`constants`, `config`...)
