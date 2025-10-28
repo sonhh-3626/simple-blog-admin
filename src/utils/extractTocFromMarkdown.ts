@@ -21,7 +21,7 @@ export const extractTocFromMarkdown = (markdown: string): TocItem[] => {
   return toc;
 }
 
-function slugify(text: string): string {
+export default function slugify(text: string): string {
   return text
     .toLowerCase()
     .normalize("NFD") // tách dấu tiếng Việt

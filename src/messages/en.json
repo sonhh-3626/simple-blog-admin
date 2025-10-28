@@ -65,5 +65,37 @@
   "SidenavItem": {
     "posts": "Post",
     "createNewPost": "Create new post"
+  },
+  "Form": {
+    "Title": "Title",
+    "Excerpt": "Excerpt",
+    "ReadTime": "Read time",
+    "Minutes": "minutes",
+    "Content": "Content (Markdown)",
+    "Category": "Category",
+    "Tags": "Tags",
+    "Metadata": "Metadata",
+    "Actions": {
+      "submit": "Create Post",
+      "cancel": "Cancel"
+    },
+    "ImageUpload": {
+      "label": "Cover Image",
+      "clickToUpload": "Click to upload",
+      "orDragDrop": "or drag and drop",
+      "fileHint": "SVG, PNG, JPG or GIF (MAX. 800x400px)",
+      "uploading": "Uploading...",
+      "uploadFailed": "Image upload failed.",
+      "uploadError": "An error occurred during upload.",
+      "previewAlt": "Preview"
+    },
+    "Validation": {
+      "titleRequired": "Title is required.",
+      "excerptRequired": "Excerpt is required.",
+      "contentRequired": "Content is required.",
+      "categoryRequired": "Category is required.",
+      "tagsRequired": "At least one tag is required.",
+      "coverImageRequired": "Cover image is required."
+    }
   }
 }
