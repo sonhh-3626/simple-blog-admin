@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import {type Author } from "@/types/post";
 
 interface AuthorInfoProps {
@@ -9,7 +10,7 @@ export default function AuthorInfo({
 }: AuthorInfoProps) {
   return (
     <div className="flex items-center space-x-4">
-      <img
+      <Image
         src={author.avatar}
         alt={author.name}
         width={60}

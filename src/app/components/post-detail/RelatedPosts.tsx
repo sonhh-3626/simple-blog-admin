@@ -1,6 +1,8 @@
 import { useTranslations } from 'next-intl';
-import { Post } from '@/types/post';
+import Image from 'next/image';
 import Link from 'next/link';
+
+import { Post } from '@/types/post';
 
 interface RelatedPostsProps {
   relatedPosts: Post[];
@@ -24,10 +26,11 @@ export default function RelatedPosts({
               >
                 <div className="flex space-x-3">
                   <div className="relative w-20 h-20 flex-shrink-0 rounded overflow-hidden">
-                    <img
+                    <Image
                       src={relatedPost.coverImage}
                       alt={relatedPost.title}
-                      className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-300"
+                      fill
+                      className="object-cover group-hover:scale-110 transition-transform duration-300"
                     />
                   </div>
                   <div className="flex-1">

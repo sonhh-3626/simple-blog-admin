@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation';
+import Image from 'next/image';
 
 import CategoryBadge from '@/app/components/badge/CategoryBadge';
 import ShareSection from '@/app/components/post-detail/ShareSection';
@@ -62,11 +63,12 @@ export default async function PostDetailPage({
         <AuthorInfo author={post.author} />
       </div>
 
-      <div className="w-full h-[500px] mb-10">
-        <img
+      <div className="relative w-full h-[500px] mb-10">
+        <Image
           src={post.coverImage}
           alt={post.title}
-          className="object-cover w-full h-full"
+          fill
+          className="object-cover"
         />
       </div>
 
