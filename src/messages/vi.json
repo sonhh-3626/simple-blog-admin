@@ -65,5 +65,40 @@
   "SidenavItem": {
     "posts": "Danh sách bài viết",
     "createNewPost": "Tạo bài viết"
+  },
+  "Form": {
+    "Title": "Tiêu đề",
+    "Excerpt": "Tóm tắt",
+    "ReadTime": "Thời gian đọc",
+    "Minutes": "phút",
+    "Content": "Nội dung (Markdown)",
+    "Category": "Danh mục",
+    "Tags": "Thẻ",
+    "Metadata": "Thông tin bổ sung",
+    "SelectCategories": "Lựa chọn phân mục",
+    "Actions": {
+      "submit": "Tạo bài viết",
+      "cancel": "Hủy",
+      "save": "Lưu thay đổi",
+      "saving": "Đang lưu..."
+    },
+    "ImageUpload": {
+      "label": "Ảnh bìa",
+      "clickToUpload": "Nhấn để tải lên",
+      "orDragDrop": "hoặc kéo thả vào đây",
+      "fileHint": "Hỗ trợ: SVG, PNG, JPG hoặc GIF (TỐI ĐA 800x400px)",
+      "uploading": "Đang tải ảnh...",
+      "uploadFailed": "Tải ảnh thất bại.",
+      "uploadError": "Đã xảy ra lỗi khi tải ảnh.",
+      "previewAlt": "Xem trước"
+    },
+    "Validation": {
+      "titleRequired": "Tiêu đề là bắt buộc.",
+      "excerptRequired": "Excerpt là bắt buộc.",
+      "contentRequired": "Nội dung là bắt buộc.",
+      "categoryRequired": "Phân loại là bắt buộc.",
+      "tagsRequired": "Cần có tối thiểu một tag.",
+      "coverImageRequired": "Cover image là bắt buộc."
+    }
   }
 }
