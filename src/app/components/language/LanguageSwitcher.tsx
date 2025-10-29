@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { useRef, useState, useEffect } from "react";
-import { useLanguage } from "./useLanguage";
-import LanguageDropdown from "./LanguageDropdown";
+import { useRef, useState, useEffect } from 'react';
+import { useLanguage } from './useLanguage';
+import LanguageDropdown from './LanguageDropdown';
 
 export default function LanguageSwitcher() {
   const { locale, changeLocale, languages } = useLanguage();
@@ -17,8 +17,8 @@ export default function LanguageSwitcher() {
         setIsOpen(false);
       }
     };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
   return (
