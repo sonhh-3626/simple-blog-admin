@@ -8,7 +8,7 @@ interface FilterProps {
   postsPerPage: number;
   setPostsPerPage: (limit: number) => void;
   sortBy: string;
-  setSortBy: (order: string) => void;
+  setSortBy: (sort: string) => void;
 }
 
 export default function Filter({
