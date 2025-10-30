@@ -16,5 +16,5 @@ export default function TagsPostCard({ tags }: TagsPostCardProps) {
         </span>
       ))}
     </div>
-  )
+  );
 }

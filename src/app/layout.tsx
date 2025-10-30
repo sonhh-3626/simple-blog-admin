@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 
 import './globals.css';
 import { DEFAULT_TITLE } from './constants';
+import Providers from './components/auth/Provider';
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
@@ -32,7 +33,9 @@ export default async function RootLayout({
     <html lang={locale}>
       <body className="min-h-screen bg-gray-50">
         <NextIntlClientProvider messages={messages}>
-            {children}
+            <Providers>
+              {children}
+            </Providers>
         </NextIntlClientProvider>
       </body>
     </html>
