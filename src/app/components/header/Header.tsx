@@ -1,5 +1,6 @@
 import { useTranslations } from 'next-intl';
 import LanguageSwitcher from '../language/LanguageSwitcher';
+import SignInButton from '../auth/SigninButton';
 
 export default function Header() {
   const t = useTranslations('Header');
@@ -10,6 +11,7 @@ export default function Header() {
       </div>
       <div className="flex items-center">
         <LanguageSwitcher />
+        <SignInButton />
       </div>
     </header>
   );
