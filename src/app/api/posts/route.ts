@@ -43,3 +43,42 @@ export async function GET(request: Request) {
     return NextResponse.json({ message: 'Internal Server Error' }, { status: 500 });
   }
 }
+
+export async function POST(request: Request) {
+  try {
+    const newPost = await request.json();
+
+    if (!newPost.title || !newPost.content) {
+      return NextResponse.json({ message: 'Title and content are required' }, { status: 400 });
+    }
+
+    const currentDate = new Date().toISOString();
+    const postToAdd = {
+      ...newPost,
+      postId: crypto.randomUUID(),
+      publishedAt: currentDate,
+      updatedAt: currentDate,
+    };
+
+    const res = await fetch(DB_API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(postToAdd),
+    });
+
+    if (!res.ok) throw new Error('Failed to create post on json-server');
+    const createdPost = await res.json();
+
+    return NextResponse.json(
+      {
+        success: true,
+        message: 'Post created successfully',
+        data: createdPost,
+      },
+      { status: 201 }
+    );
+  } catch (error) {
+    console.error('Error creating post:', error);
+    return NextResponse.json({ message: 'Internal Server Error' }, { status: 500 });
+  }
+}
