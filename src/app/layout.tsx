@@ -18,15 +18,16 @@ export async function generateMetadata(): Promise<Metadata> {
 
 interface RootLayoutProp {
   children: React.ReactNode;
-  params: {
+  params: Promise<{
     locale: string;
-  };
+  }>;
 }
 
 export default async function RootLayout({
   children,
-  params: { locale },
+  params,
 }: RootLayoutProp) {
+  const { locale } = await params;
   const messages = await getMessages();
 
   return (

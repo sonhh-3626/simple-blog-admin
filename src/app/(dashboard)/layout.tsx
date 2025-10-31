@@ -1,14 +1,11 @@
 import Header from './../components/header/Header';
 import Sidebar from './../components/sidebar/Sidebar';
 
-interface RootLayoutProp {
+interface DashboardLayoutProp {
   children: React.ReactNode;
-  params: {
-    locale: string;
-  };
 }
 
-export default async function DashboardLayout({ children }: RootLayoutProp) {
+export default async function DashboardLayout({ children }: DashboardLayoutProp) {
   return (
     <div className="min-h-screen bg-white">
       <Header />
