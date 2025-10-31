@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --webpack",
+    "dev": "concurrently \"next dev --webpack\" \"json-server --watch db.json --port 3000\"",
     "build": "next build --webpack",
     "test": "jest --config jest.config.cjs",
     "start": "next start",
@@ -27,6 +27,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "babel-plugin-react-compiler": "1.0.0",
+    "concurrently": "^9.2.1",
     "eslint": "^9",
     "eslint-config-next": "16.0.0",
     "jest": "^30.2.0",

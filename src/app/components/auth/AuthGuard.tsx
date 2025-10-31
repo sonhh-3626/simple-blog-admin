@@ -19,8 +19,6 @@ export default function AuthGuard({
   useEffect(() => {
     if (status === 'unauthenticated') {
       router.replace(redirectTo);
-    } else if (status === 'authenticated') {
-      router.replace(redirectTo);
     }
   }, [status, router, redirectTo, session]);
 

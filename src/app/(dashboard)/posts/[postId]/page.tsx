@@ -10,21 +10,59 @@ import MetaInfo from '@/app/components/post-detail/MetaInfo';
 import AuthorInfo from '@/app/components/post-detail/AuthorInfo';
 import ContentSection from '@/app/components/post-detail/ContentSection';
 import { Post } from '@/types/post';
+import { Metadata } from 'next';
+import { fetchPostById } from '@/lib/posts';
 
-export async function fetchPostById(id: string): Promise<{ post: Post, relatedPosts: Post[] }> {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ''}/api/posts/${id}`, {});
+export async function generateMetadata(
+  { params }: { params: { postId: string } }
+): Promise<Metadata> {
+  const { postId } = await params;
+  console.log(postId)
+  const { post, relatedPosts} = await fetchPostById(postId);
 
-  if (response.status === 404) {
-    notFound();
+  if (!post) {
+    return {
+      title: 'Bài viết không tồn tại',
+    }
   }
 
-  if (!response.ok) {
-    throw new Error(`Failed to fetch post (status ${response.status})`);
-  }
+  return {
+    title: post.title,
+    keywords: post.tags,
 
-  const json = await response.json();
-  return json.data;
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      type: 'article',
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}/posts/${post.postId}`,
+      publishedTime: post.publishedAt,
+      modifiedTime: post.updatedAt,
+      images: [
+        {
+          url: post.coverImage,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
+    },
+  }
 }
+
+// export async function fetchPostById(id: string): Promise<{ post: Post, relatedPosts: Post[] }> {
+//   const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ''}/api/posts/${id}`, {});
+
+//   if (response.status === 404) {
+//     notFound();
+//   }
+
+//   if (!response.ok) {
+//     throw new Error(`Failed to fetch post (status ${response.status})`);
+//   }
+
+//   const json = await response.json();
+//   return json.data;
+// }
 
 interface PostDetailPageProps {
   params: { postId: string }
@@ -41,8 +79,38 @@ export default async function PostDetailPage({
     notFound();
   }
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": post.title,
+    "description": post.excerpt,
+    "image": post.coverImage,
+    "author": {
+      "@type": "Person",
+      "name": post.author.name
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Simple Blog Admin", // Replace with your blog name
+      "logo": {
+        "@type": "ImageObject",
+        "url": `${process.env.NEXT_PUBLIC_BASE_URL}/logo.png` // Replace with your logo URL
+      }
+    },
+    "datePublished": post.publishedAt,
+    "dateModified": post.updatedAt,
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `${process.env.NEXT_PUBLIC_BASE_URL}/posts/${post.postId}` // Using postId as per existing type
+    }
+  };
+
   return (
     <article className="pb-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="mx-auto pt-8 pb-12 bg-white">
         <CategoryBadge title={post.category} />
 
