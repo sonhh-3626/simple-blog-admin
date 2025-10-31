@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 import { Author } from "@/types/post";
 
 interface AuthorAvatarProps {
@@ -10,7 +12,7 @@ export default function AuthorAvatar({
   return (
     <div className="flex items-center justify-between pt-4 border-t border-gray-100">
       <div className="flex items-center space-x-3">
-        <img
+        <Image
           src={author.avatar}
           alt={author.name}
           width={40}

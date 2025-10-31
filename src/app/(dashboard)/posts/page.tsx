@@ -86,9 +86,8 @@ export default function PostsPage() {
         });
         setPosts(data);
         setTotalPages(totalPages);
-      } catch (error: any) {
-        console.error('Failed to load posts:', error.message);
-        // Optionally, you could set an error state here to display a message to the user
+      } catch (error) {
+        console.error('Error fetching posts:', error);
       }
     };
 
