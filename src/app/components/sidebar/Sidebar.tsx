@@ -17,7 +17,7 @@ export default function Sidebar() {
     },
     {
       label: t('createNewPost'),
-      href: '/create-new-post',
+      href: '/posts/create',
       icon: <FaPlus className="w-4 h-4" />,
     },
   ];
