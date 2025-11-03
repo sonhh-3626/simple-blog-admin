@@ -1,3 +1,6 @@
+'use client';
+
+import AuthGuard from '@/app/components/auth/AuthGuard';
 import Breadcrumb from '@/app/components/Breadcrumb';
 
 interface PostListLayoutProps {
@@ -12,7 +15,9 @@ export default function PostListLayout(
       <div className="mt-10">
         <Breadcrumb />
       </div>
-      {children}
+      <AuthGuard>
+        {children}
+      </AuthGuard>
     </div>
   )
 }

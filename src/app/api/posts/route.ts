@@ -1,9 +1,15 @@
+import { getServerSession } from 'next-auth';
+import { authOptions } from '../auth/[...nextauth]/route';
 import { Post } from '@/types/post';
 import { NextResponse } from 'next/server';
 
 const DB_API_URL = `${process.env.DB_API_URL}`;
 
 export async function GET(request: Request) {
+  const session = await getServerSession(authOptions);
+  if (!session) {
+    return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
+  }
   try {
     const { searchParams } = new URL(request.url);
     const searchQuery = searchParams.get('search') || '';
@@ -45,6 +51,10 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
+  const session = await getServerSession(authOptions);
+  if (!session) {
+    return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
+  }
   try {
     const newPost = await request.json();
 

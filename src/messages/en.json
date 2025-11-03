@@ -98,5 +98,11 @@
       "tagsRequired": "At least one tag is required.",
       "coverImageRequired": "Cover image is required."
     }
+  },
+  "Login": {
+    "loginToContinue": "Must login with Google",
+    "loginWithGoogle": "Continue with Google",
+    "loginBtn": "Login",
+    "logoutBtn": "Logout"
   }
 }
